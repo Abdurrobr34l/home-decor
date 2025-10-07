@@ -1,25 +1,38 @@
 import React from "react";
-import { Link, useLoaderData } from "react-router";
+import { Link } from "react-router";
+import useProducts from "../Hooks/useProducts";
 
 const Home = () => {
-  const productsData = useLoaderData();
-  const featuredProducts = productsData.slice(0, 6)
+  const { products, loading, error } = useProducts();
+console.log(loading, error);
+
+  const featuredProducts = products.slice(0, 6);
 
   return (
     <div>
       <div className="flex items-center justify-between pb-6">
-        <h2 className="pl-1 text-4xl font-semibold border-l-4 border-blue-600">Featured Products</h2>
-        <Link to={"/products"} className="btn px-0 font-bold bg-transparent text-blue-600 border-none shadow-none hover:text-blue-700">See All Products</Link>
+        <h2 className="pl-1 text-4xl font-semibold border-l-4 border-blue-600">
+          Featured Products
+        </h2>
+        <Link
+          to={"/products"}
+          className="btn px-0 font-bold bg-transparent text-blue-600 border-none shadow-none hover:text-blue-700"
+        >
+          See All Products
+        </Link>
       </div>
-      
+
       <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
-        {/*  category    material  dimensions stock   */}
+        {/*  material  dimensions stock   */}
         {featuredProducts.map(
-          ({ id, name, image, alt, description, price, stock }) => (
+          ({ id, name, image, alt, description, price, stock, category }) => (
             <div key={id} className="card bg-base-100 shadow-sm">
+              {/* Categorie */}
+              <div className="badge absolute right-0 top-2 mr-2 py-5 px-3 font-bold bg-blue-100 text-blue-600 border-none rounded-full">{category}</div>
+              
               {/* Product Image */}
               <figure>
-                <img src={image} alt={alt} className="h-[350px] w-full" />
+                <img src={image} alt={alt} className="h-[350px] w-full rounded-t-lg" />
               </figure>
 
               {/* Product Body */}
@@ -34,7 +47,11 @@ const Home = () => {
                 </div>
 
                 {/* Stock Details */}
-                <p className={`font-semibold ${stock ? "text-green-600" : "text-red-600"}`}>
+                <p
+                  className={`font-semibold ${
+                    stock ? "text-green-600" : "text-red-600"
+                  }`}
+                >
                   {stock ? "In Stock" : "Not in Stock"}
                 </p>
               </div>
