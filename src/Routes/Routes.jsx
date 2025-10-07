@@ -10,15 +10,18 @@ export const router = createBrowserRouter([
     path: "/",
     Component: MainLayout,
     errorElement: <ErrorPage />,    // * Error Page
+    hydrateFallbackElement: <p>Loading...</p>, // * Just to remove console error message of hydrateFallback
     children: [
       {
         // path: "/home",
         index: true,
         Component: Home,
+        loader: () => fetch("./furnitureData.json"),
       },
       {
         path: "/products",
         Component: Products,
+        loader: () => fetch("./furnitureData.json"),
       },
       {
         path: "/wishlist",
