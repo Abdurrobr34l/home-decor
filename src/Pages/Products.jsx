@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useProducts from "../Hooks/useProducts";
+import { Link } from "react-router";
 
 const Products = () => {
   //* Getting data from hook
@@ -42,7 +43,7 @@ const Products = () => {
         {/*  material  dimensions stock   */}
         {findSearchedProduct.map(
           ({ id, name, image, alt, description, price, stock, category }) => (
-            <div key={id} className="card bg-base-100 shadow-sm">
+            <div key={id} className="card bg-base-100 shadow-sm transition-transform duration-300 ease-linear hover:scale-[102%]">
               {/* Categorie */}
               <div className="badge absolute right-0 top-2 mr-2 py-5 px-3 font-bold bg-blue-100 text-blue-600 border-none rounded-full">
                 {category}
@@ -65,7 +66,7 @@ const Products = () => {
                 {/* Button */}
                 <div className="card-actions items-center justify-end">
                   <p className="text-xl font-bold">${price}</p>
-                  <button className="btn btn-style">Buy Now</button>
+                  <Link to={`/product/${id}`} className="btn btn-style">View More</Link>
                 </div>
 
                 {/* Stock Details */}

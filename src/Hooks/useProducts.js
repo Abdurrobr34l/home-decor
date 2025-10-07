@@ -9,7 +9,7 @@ const useProducts = () => {
 
   useEffect(() => {
     setLoading(true) //* It is added for backup. Incase if its value in above state becomes false then this line will correct it.
-    axios("./furnitureData.json")
+    axios("/furnitureData.json")
     .then(data => setProducts(data.data))
     .catch(err => setError(err))
     .finally(() => setLoading(false))
