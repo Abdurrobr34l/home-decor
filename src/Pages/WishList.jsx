@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
+import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis,   Rectangle } from "recharts";
 
 const WishList = () => {
   const [wishlist, setWishlist] = useState([]);
@@ -31,9 +32,21 @@ const WishList = () => {
     localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
   };
 
+  // Cart
+  const totalOfCategory = {}
+  wishlist.forEach(product => {
+    const category = product.category;
+    totalOfCategory[category] = (totalOfCategory[category] || 0) + product.price
+  })
+
+  const chartData = Object.keys(totalOfCategory).map(category => ({
+    category,
+    total: totalOfCategory[category],
+  }))
+
   return (
     <section>
-      {/* Title */}
+      {/* Title & Sort select */}
       <div className="flex items-center justify-between">
         <h2 className="pl-2 text-3xl font-semibold border-l-4 border-blue-600 md:text-4xl">
           Wish List{" "}
@@ -62,7 +75,7 @@ const WishList = () => {
           ({ id, name, price, category, moreDescription, image, alt }) => (
             <li
               key={id}
-              className="list-row flex flex-col shadow-sm md:grid relative"
+              className="list-row relative flex flex-col shadow-sm transition-transform duration-300 ease-linear hover:scale-[102%] md:grid"
             >
               {/* Delete Button */}
               <button
@@ -96,6 +109,39 @@ const WishList = () => {
           )
         )}
       </ul>
+
+      {/* Chart */}
+      <div className="space-y-6">
+        <h3 className="pl-2 text-3xl font-semibold border-l-4 border-blue-600 md:text-4xl">
+          Wishlist Summary
+        </h3>
+
+        <div className="p-4 pl-0 h-80 bg-base-100 border rounded-xl">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart
+              width={500}
+              height={300}
+              data={chartData}
+              >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="category" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              {/* <Bar
+                dataKey="pv"
+                fill="#8884d8"
+                activeBar={<Rectangle fill="pink" stroke="blue" />}
+              /> */}
+              <Bar
+                dataKey="total"
+                fill="#82ca9d"
+                activeBar={<Rectangle fill="gold" stroke="purple" />}
+              />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
     </section>
   );
 };
