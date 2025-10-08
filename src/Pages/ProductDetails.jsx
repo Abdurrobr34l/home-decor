@@ -11,6 +11,7 @@ const ProductDetails = () => {
   
   const { isWishlisted, toggleWishlist } = useWishlist(product);
   
+  
   // Guard: show loading if product not found
   if (!product) {
     return (

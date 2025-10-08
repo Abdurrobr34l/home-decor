@@ -22,7 +22,7 @@ const Products = () => {
     <div>
       {/* Search Box */}
       <div className="flex items-center justify-between pb-6">
-        <h2 className="pl-1 text-4xl font-semibold border-l-4 border-blue-600">
+        <h2 className="pl-2 text-4xl font-semibold border-l-4 border-blue-600">
           All Products <span className="text-sm font-bold text-[#131313]/60">({findSearchedProduct.length}) Products Found</span>
         </h2>
 

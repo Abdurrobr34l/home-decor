@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <div>
       <div className="flex items-center justify-between pb-6">
-        <h2 className="pl-1 text-4xl font-semibold border-l-4 border-blue-600">
+        <h2 className="pl-2 text-4xl font-semibold border-l-4 border-blue-600">
           Featured Products
         </h2>
         <Link

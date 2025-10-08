@@ -40,7 +40,7 @@ const Navbar = () => {
             }
           </ul>
         </div>
-        <Link to={"/"} className="text-2xl font-black uppercase">Home <span className="text-blue-600">Decor</span></Link>
+        <Link to={"/"} className="ml-2 text-xl font-black uppercase md:text-2xl lg:ml-0">Home <span className="text-blue-600">Decor</span></Link>
       </div>
 
       {/* Menu */}
