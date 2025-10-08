@@ -1,16 +1,17 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis,   Rectangle } from "recharts";
+import { loadWishlist } from "../utilities/localStorage";
 
 const WishList = () => {
-  const [wishlist, setWishlist] = useState([]);
+  const [wishlist, setWishlist] = useState(() => loadWishlist());
   const [sortOrder, setSortOrder] = useState("none");
 
   // Load wishlist from localStorage on mount
-  useEffect(() => {
-    const savedlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-    // Remove null entries
-    setWishlist(savedlist.filter(Boolean));
-  }, []);
+  // useEffect(() => {
+  //   const savedlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+  //   // Remove null entries
+  //   setWishlist(savedlist.filter(Boolean));
+  // }, []);
 
   // Memoized sorted wishlist
   const sortedItems = useMemo(() => {
@@ -135,8 +136,8 @@ const WishList = () => {
               /> */}
               <Bar
                 dataKey="total"
-                fill="#82ca9d"
-                activeBar={<Rectangle fill="gold" stroke="purple" />}
+                fill="#155dfc"
+                activeBar={<Rectangle fill="#131313a1" />}
               />
             </BarChart>
           </ResponsiveContainer>
